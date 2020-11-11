@@ -1,0 +1,5 @@
+com/studyPlan/weekOne/WeekOneApplicationTests.java
+ com.studyPlan.weekOne.WeekOneApplicationTests
+com/studyPlan/weekOne/GoodsListTest.java
+ com.studyPlan.weekOne.GoodsListTest
+ com.studyPlan.weekOne.GoodsListTest$addGoodsItem

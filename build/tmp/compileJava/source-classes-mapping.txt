@@ -8,10 +8,10 @@ com/studyPlan/weekOne/exception/GoodsItemNotFoundById.java
  com.studyPlan.weekOne.exception.GoodsItemNotFoundById
 com/studyPlan/weekOne/exception/ErrorResult.java
  com.studyPlan.weekOne.exception.ErrorResult
+com/studyPlan/weekOne/entity/GoodsItem.java
+ com.studyPlan.weekOne.entity.GoodsItem
+ com.studyPlan.weekOne.entity.GoodsItem$GoodsItemBuilder
 com/studyPlan/weekOne/service/GoodsListService.java
  com.studyPlan.weekOne.service.GoodsListService
 com/studyPlan/weekOne/controller/GoodsListController.java
  com.studyPlan.weekOne.controller.GoodsListController
-com/studyPlan/weekOne/entity/GoodsItem.java
- com.studyPlan.weekOne.entity.GoodsItem
- com.studyPlan.weekOne.entity.GoodsItem$GoodsItemBuilder

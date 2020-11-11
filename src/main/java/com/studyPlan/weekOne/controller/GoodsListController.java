@@ -33,4 +33,9 @@ public class GoodsListController {
     public void deleteGoodsItem (@PathVariable Integer id) {
         goodsListService.deleteGoodsItem(id);
     }
+
+    @PatchMapping
+    public void updateGoodsItemInfo (@RequestBody @Valid GoodsItem goodsItem) {
+        goodsListService.updateGoodsItem(goodsItem);
+    }
 }

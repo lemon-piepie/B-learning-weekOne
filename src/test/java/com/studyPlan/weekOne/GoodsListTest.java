@@ -129,8 +129,6 @@ public class GoodsListTest {
             mockMvc.perform(get("/goodsItem"))
                     .andExpect(jsonPath("$[0].name",is("apple")))
                     .andExpect(jsonPath("$[1].name",is("carrot")))
-                    .andExpect(jsonPath("$[0].id",is(3)))
-                    .andExpect(jsonPath("$[1].id",is(4)))
                     .andExpect(jsonPath("$[0].unitPrice",is(5.00)))
                     .andExpect(jsonPath("$[1].unitPrice",is(4.00)))
                     .andExpect(status().isOk());
@@ -147,7 +145,8 @@ public class GoodsListTest {
                     .shop("fruitApartment")
                     .build();
             goodsItemRepository.save(newGoods);
-            mockMvc.perform(delete("/goodsItem/1"))
+            Integer targetGoodsId = newGoods.getId();
+            mockMvc.perform(delete("/goodsItem/"+targetGoodsId))
                     .andExpect(status().isNoContent());
         }
 
@@ -163,6 +162,38 @@ public class GoodsListTest {
                     .andExpect(jsonPath("$.message",is("该商品不存在")))
                     .andExpect(jsonPath("$.code",is(404)))
                     .andExpect(status().isNotFound());
+        }
+    }
+
+    @Nested
+    class updateGoodsItem {
+        @Test
+        void should_success_when_goods_item_exist() throws Exception {
+            GoodsItem oldGoods = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.00)
+                    .shop("fruitApartment")
+                    .build();
+            goodsItemRepository.save(oldGoods);
+            GoodsItem newGoods = GoodsItem.builder()
+                    .id(oldGoods.getId())
+                    .name("carrot")
+                    .unitPrice(4.00)
+                    .shop("vegetableApartment")
+                    .build();
+            ObjectMapper objectMapper = new ObjectMapper();
+            String newGoodsJson = objectMapper.writeValueAsString(newGoods);
+
+            mockMvc.perform(patch("/goodsItem")
+                    .content(newGoodsJson)
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk());
+            mockMvc.perform(get("/goodsItem"))
+                    .andExpect(jsonPath("$[0].name",is("carrot")))
+                    .andExpect(jsonPath("$[0].unitPrice",is(4.00)))
+                    .andExpect(jsonPath("$[0].shop",is("vegetableApartment")))
+                    .andExpect(jsonPath("$[0].id",is(oldGoods.getId())))
+                    .andExpect(status().isOk());
         }
     }
 }

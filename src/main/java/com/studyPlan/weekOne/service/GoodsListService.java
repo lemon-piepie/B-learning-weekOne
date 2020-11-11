@@ -32,4 +32,17 @@ public class GoodsListService {
             throw new GoodsItemNotFoundById();
         }
     }
+
+    public void updateGoodsItem(GoodsItem goodsItem) {
+        if (goodsItemRepository.findById(goodsItem.getId()).isPresent()) {
+            GoodsItem target = goodsItemRepository.findById(goodsItem.getId()).get();
+            target.setName(goodsItem.getName());
+            target.setUrl(goodsItem.getUrl());
+            target.setShop(goodsItem.getShop());
+            target.setUnitPrice(goodsItem.getUnitPrice());
+            goodsItemRepository.save(target);
+        } else {
+            throw new GoodsItemNotFoundById();
+        }
+    }
 }

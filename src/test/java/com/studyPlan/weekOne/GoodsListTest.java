@@ -150,5 +150,19 @@ public class GoodsListTest {
             mockMvc.perform(delete("/goodsItem/1"))
                     .andExpect(status().isNoContent());
         }
+
+        @Test
+        void should_success_when_goods_item_not_exist () throws Exception {
+            GoodsItem newGoods = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.00)
+                    .shop("fruitApartment")
+                    .build();
+            goodsItemRepository.save(newGoods);
+            mockMvc.perform(delete("/goodsItem/22"))
+                    .andExpect(jsonPath("$.message",is("该商品不存在")))
+                    .andExpect(jsonPath("$.code",is(404)))
+                    .andExpect(status().isNotFound());
+        }
     }
 }

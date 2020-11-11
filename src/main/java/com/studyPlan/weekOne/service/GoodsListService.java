@@ -1,6 +1,7 @@
 package com.studyPlan.weekOne.service;
 
 import com.studyPlan.weekOne.entity.GoodsItem;
+import com.studyPlan.weekOne.exception.GoodsItemNotFoundById;
 import com.studyPlan.weekOne.repository.GoodsItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class GoodsListService {
         if (goodsItemRepository.findById(id).isPresent()) {
             goodsItemRepository.deleteById(id);
         } else {
-            throw new Error("该商品不存在");
+            throw new GoodsItemNotFoundById();
         }
     }
 }

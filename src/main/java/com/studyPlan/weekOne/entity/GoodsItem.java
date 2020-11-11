@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class GoodsItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     @NotNull

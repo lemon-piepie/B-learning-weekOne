@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.hasLength;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -131,8 +129,8 @@ public class GoodsListTest {
             mockMvc.perform(get("/goodsItem"))
                     .andExpect(jsonPath("$[0].name",is("apple")))
                     .andExpect(jsonPath("$[1].name",is("carrot")))
-                    .andExpect(jsonPath("$[0].id",is(1)))
-                    .andExpect(jsonPath("$[1].id",is(2)))
+                    .andExpect(jsonPath("$[0].id",is(3)))
+                    .andExpect(jsonPath("$[1].id",is(4)))
                     .andExpect(jsonPath("$[0].unitPrice",is(5.00)))
                     .andExpect(jsonPath("$[1].unitPrice",is(4.00)))
                     .andExpect(status().isOk());
@@ -152,6 +150,5 @@ public class GoodsListTest {
             mockMvc.perform(delete("/goodsItem/1"))
                     .andExpect(status().isNoContent());
         }
-
     }
 }

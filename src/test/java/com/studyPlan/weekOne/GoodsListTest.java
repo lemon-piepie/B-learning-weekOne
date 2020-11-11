@@ -196,4 +196,69 @@ public class GoodsListTest {
                     .andExpect(status().isOk());
         }
     }
+
+    @Nested
+    class getGoodsByName {
+        @Test
+        void should_success_when_find_one_goods_item_by_name () throws Exception {
+            GoodsItem goodsItem = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.00)
+                    .shop("fruitApartment")
+                    .build();
+            goodsItemRepository.save(goodsItem);
+            mockMvc.perform(get("/goodsItem/apple"))
+                    .andExpect(jsonPath("$[0].name",is("apple")))
+                    .andExpect(jsonPath("$[0].unitPrice",is(5.00)))
+                    .andExpect(jsonPath("$[0].shop",is("fruitApartment")))
+                    .andExpect(status().isOk());
+        }
+
+        @Test
+        void should_success_when_find_few_goods_items_by_name () throws Exception {
+            GoodsItem firstGoodsItem = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.00)
+                    .shop("fruitApartment")
+                    .build();
+            goodsItemRepository.save(firstGoodsItem);
+            GoodsItem secondGoodsItem = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.50)
+                    .shop("freshApartment")
+                    .build();
+            goodsItemRepository.save(secondGoodsItem);
+            GoodsItem thirdGoodsItem = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(4.99)
+                    .shop("supermarket")
+                    .build();
+            goodsItemRepository.save(thirdGoodsItem);
+            mockMvc.perform(get("/goodsItem/apple"))
+                    .andExpect(jsonPath("$[0].name",is("apple")))
+                    .andExpect(jsonPath("$[0].unitPrice",is(5.00)))
+                    .andExpect(jsonPath("$[0].shop",is("fruitApartment")))
+                    .andExpect(jsonPath("$[1].name",is("apple")))
+                    .andExpect(jsonPath("$[1].unitPrice",is(5.50)))
+                    .andExpect(jsonPath("$[1].shop",is("freshApartment")))
+                    .andExpect(jsonPath("$[2].name",is("apple")))
+                    .andExpect(jsonPath("$[2].unitPrice",is(4.99)))
+                    .andExpect(jsonPath("$[2].shop",is("supermarket")))
+                    .andExpect(status().isOk());
+        }
+
+        @Test
+        void should_error_when_not_found_proper_goods_item () throws Exception {
+            GoodsItem newGoods = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.00)
+                    .shop("fruitApartment")
+                    .build();
+            goodsItemRepository.save(newGoods);
+            mockMvc.perform(get("/goodsItem/banana"))
+                    .andExpect(jsonPath("$.message",is("没有找到相应的商品，请重新输入关键词")))
+                    .andExpect(jsonPath("$.code",is(404)))
+                    .andExpect(status().isNotFound());
+        }
+    }
 }

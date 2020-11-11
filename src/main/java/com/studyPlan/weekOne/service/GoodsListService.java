@@ -2,6 +2,7 @@ package com.studyPlan.weekOne.service;
 
 import com.studyPlan.weekOne.entity.GoodsItem;
 import com.studyPlan.weekOne.exception.GoodsItemNotFoundById;
+import com.studyPlan.weekOne.exception.GoodsItemNotFoundByName;
 import com.studyPlan.weekOne.repository.GoodsItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,12 @@ public class GoodsListService {
         } else {
             throw new GoodsItemNotFoundById();
         }
+    }
+
+    public List<GoodsItem> getGoodsItemByName(String name) {
+        if (!goodsItemRepository.findAllByName(name).isPresent()){
+            throw new GoodsItemNotFoundByName();
+        }
+        return goodsItemRepository.findAllByName(name).get();
     }
 }

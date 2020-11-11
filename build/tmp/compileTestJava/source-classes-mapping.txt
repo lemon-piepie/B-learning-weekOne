@@ -5,4 +5,5 @@ com/studyPlan/weekOne/GoodsListTest.java
  com.studyPlan.weekOne.GoodsListTest$addGoodsItem
  com.studyPlan.weekOne.GoodsListTest$deleteGoodsItemById
  com.studyPlan.weekOne.GoodsListTest$getAllGoodsItem
+ com.studyPlan.weekOne.GoodsListTest$getGoodsByName
  com.studyPlan.weekOne.GoodsListTest$updateGoodsItem

@@ -23,7 +23,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GoodsItemNotFoundById.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResult userNotExist(GoodsItemNotFoundById ex){
+    public ErrorResult goodsNotExist(GoodsItemNotFoundById ex){
+        return new ErrorResult(new Date(),404,"NOT FOUND",ex.getMessage());
+    }
+
+    @ExceptionHandler(GoodsItemNotFoundByName.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResult goodsNotFound(GoodsItemNotFoundByName ex){
         return new ErrorResult(new Date(),404,"NOT FOUND",ex.getMessage());
     }
 }

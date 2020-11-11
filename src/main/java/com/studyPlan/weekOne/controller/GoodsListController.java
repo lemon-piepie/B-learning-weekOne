@@ -38,4 +38,9 @@ public class GoodsListController {
     public void updateGoodsItemInfo (@RequestBody @Valid GoodsItem goodsItem) {
         goodsListService.updateGoodsItem(goodsItem);
     }
+
+    @GetMapping("/{name}")
+    public List<GoodsItem> getGoodsItemByName (@PathVariable String name) {
+        return goodsListService.getGoodsItemByName(name);
+    }
 }

@@ -24,4 +24,11 @@ public class GoodsListService {
         return goodsItemRepository.findAll();
     }
 
+    public void deleteGoodsItem (Integer id) {
+        if (goodsItemRepository.findById(id).isPresent()) {
+            goodsItemRepository.deleteById(id);
+        } else {
+            throw new Error("该商品不存在");
+        }
+    }
 }

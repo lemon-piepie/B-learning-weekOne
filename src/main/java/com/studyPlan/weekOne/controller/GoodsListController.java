@@ -28,4 +28,9 @@ public class GoodsListController {
         return goodsListService.getAllGoodsItem();
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGoodsItem (@PathVariable Integer id) {
+        goodsListService.deleteGoodsItem(id);
+    }
 }

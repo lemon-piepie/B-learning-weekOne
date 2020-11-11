@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.hasLength;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -136,5 +137,21 @@ public class GoodsListTest {
                     .andExpect(jsonPath("$[1].unitPrice",is(4.00)))
                     .andExpect(status().isOk());
         }
+    }
+
+    @Nested
+    class deleteGoodsItemById {
+        @Test
+        void should_success_when_goods_item_exist () throws Exception {
+            GoodsItem newGoods = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.00)
+                    .shop("fruitApartment")
+                    .build();
+            goodsItemRepository.save(newGoods);
+            mockMvc.perform(delete("/goodsItem/1"))
+                    .andExpect(status().isNoContent());
+        }
+
     }
 }

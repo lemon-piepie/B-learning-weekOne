@@ -2,10 +2,10 @@ com/studyPlan/weekOne/WeekOneApplication.java
  com.studyPlan.weekOne.WeekOneApplication
 com/studyPlan/weekOne/repository/GoodsItemRepository.java
  com.studyPlan.weekOne.repository.GoodsItemRepository
+com/studyPlan/weekOne/entity/GoodsItem.java
+ com.studyPlan.weekOne.entity.GoodsItem
+ com.studyPlan.weekOne.entity.GoodsItem$GoodsItemBuilder
 com/studyPlan/weekOne/service/GoodsListService.java
  com.studyPlan.weekOne.service.GoodsListService
 com/studyPlan/weekOne/controller/GoodsListController.java
  com.studyPlan.weekOne.controller.GoodsListController
-com/studyPlan/weekOne/entity/GoodsItem.java
- com.studyPlan.weekOne.entity.GoodsItem
- com.studyPlan.weekOne.entity.GoodsItem$GoodsItemBuilder

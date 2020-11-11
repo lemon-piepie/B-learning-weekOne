@@ -3,3 +3,4 @@ com/studyPlan/weekOne/WeekOneApplicationTests.java
 com/studyPlan/weekOne/GoodsListTest.java
  com.studyPlan.weekOne.GoodsListTest
  com.studyPlan.weekOne.GoodsListTest$addGoodsItem
+ com.studyPlan.weekOne.GoodsListTest$getAllGoodsItem

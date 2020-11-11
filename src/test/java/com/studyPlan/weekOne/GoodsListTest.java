@@ -12,7 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -105,6 +108,33 @@ public class GoodsListTest {
                     .content(goodsJson)
                     .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
+        }
+    }
+
+    @Nested
+    class getAllGoodsItem {
+        @Test
+        void should_success () throws Exception {
+            GoodsItem newGoods = GoodsItem.builder()
+                    .name("apple")
+                    .unitPrice(5.00)
+                    .shop("fruitApartment")
+                    .build();
+            GoodsItem anotherGoods = GoodsItem.builder()
+                    .name("carrot")
+                    .unitPrice(4.00)
+                    .shop("vegetableApartment")
+                    .build();
+            goodsItemRepository.save(newGoods);
+            goodsItemRepository.save(anotherGoods);
+            mockMvc.perform(get("/goodsItem"))
+                    .andExpect(jsonPath("$[0].name",is("apple")))
+                    .andExpect(jsonPath("$[1].name",is("carrot")))
+                    .andExpect(jsonPath("$[0].id",is(1)))
+                    .andExpect(jsonPath("$[1].id",is(2)))
+                    .andExpect(jsonPath("$[0].unitPrice",is(5.00)))
+                    .andExpect(jsonPath("$[1].unitPrice",is(4.00)))
+                    .andExpect(status().isOk());
         }
     }
 }

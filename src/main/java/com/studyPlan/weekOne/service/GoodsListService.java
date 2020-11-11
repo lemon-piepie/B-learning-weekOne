@@ -5,6 +5,8 @@ import com.studyPlan.weekOne.repository.GoodsItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class GoodsListService {
@@ -17,4 +19,9 @@ public class GoodsListService {
     public void addNewGoodsItem(GoodsItem goodsItem) {
         goodsItemRepository.save(goodsItem);
     }
+
+    public List<GoodsItem> getAllGoodsItem () {
+        return goodsItemRepository.findAll();
+    }
+
 }

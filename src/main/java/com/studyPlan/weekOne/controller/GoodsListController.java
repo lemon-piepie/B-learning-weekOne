@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -21,4 +22,10 @@ public class GoodsListController {
     public void addNewGoodsItem (@RequestBody @Valid GoodsItem goodsItem) {
         goodsListService.addNewGoodsItem(goodsItem);
     }
+
+    @GetMapping
+    public List<GoodsItem> getAllGoodsItem () {
+        return goodsListService.getAllGoodsItem();
+    }
+
 }

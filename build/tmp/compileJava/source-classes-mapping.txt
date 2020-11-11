@@ -1,0 +1,2 @@
+com/studyPlan/weekOne/WeekOneApplication.java
+ com.studyPlan.weekOne.WeekOneApplication
